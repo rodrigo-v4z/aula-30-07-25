@@ -17,4 +17,8 @@ export class Usuario {
     verificarSenha(tentativa: string): boolean {
         return this.#senha === tentativa;
     }
+
+    redefinirSenha(novaSenha: string): void {
+        this.#senha = novaSenha;
+    }
 }

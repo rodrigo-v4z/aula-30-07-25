@@ -4,8 +4,8 @@ import { Usuario } from './models/Usuario'
 
 function App() {
 
-  const u1 = new Usuario('João da Silva', 37, 'joao123');
-  const u2 = new Usuario('Maria Oliveira', 25, 'maria456');
+  const [u1, setU1] = useState(() => new Usuario('João da Silva', 37, 'joao123'));
+  const [senha, setSenha] = useState('');
   const [tentativa, setTentativa] = useState('');
 
   console.log(u1.apresentar());
@@ -18,13 +18,14 @@ function App() {
         {u1.apresentar()}
       </p>
       <p>
-        {u2.apresentar()}
+        <input type="password" placeholder='Digite a senha' onChange={e => {setSenha(e.target.value)}} />
+        <button onClick={() => {setTentativa(u1.verificarSenha(senha))}}>Enviar!</button>
       </p>
       <p>
-        <input type="password" placeholder='Digite a senha' onChange={e => {setTentativa(e.target.value)}} />
+        <button onClick={() => {u1.redefinirSenha(senha)}}>Redefinir Senha</button>
       </p>
       <p>
-        {u1.verificarSenha(tentativa) ? 'Senha correta!' : 'Senha incorreta!'}
+        {tentativa ? 'Senha correta!' : 'Senha incorreta!'}
       </p>
     </>
   )
